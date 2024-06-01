@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pdf</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pdf">.pdf</string>
+    <string name="excel">.xlsx</string>
+    <string name="excel1">.xls</string>
+    <string name="powerPoint">.pptx</string>
+    <string name="powerPoint1">.ppt</string>
+    <string name="word">.docx</string>
+    <string name="word1">.doc</string>
+</resources>
