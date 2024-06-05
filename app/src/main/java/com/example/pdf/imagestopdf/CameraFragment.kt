@@ -1,14 +1,21 @@
 package com.example.pdf.imagestopdf
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Color
+
+
 
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 
 import android.provider.MediaStore
+
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +25,7 @@ import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 
 import com.example.pdf.ImagesData
 import com.example.pdf.PdfUtils
@@ -27,11 +35,13 @@ import com.example.pdf.pdfiles.PdfViewerFragment
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-
-
-
+@Suppress("DEPRECATION")
 class CameraFragment : Fragment() {
 
     private lateinit var binding : FragmentCameraBinding
@@ -41,7 +51,7 @@ class CameraFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCameraBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -67,6 +77,7 @@ class CameraFragment : Fragment() {
             setPageLimit(10)
             setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG)
             setScannerMode(GmsDocumentScannerOptions.SCANNER_MODE_FULL)
+
         }
             .build()
 
@@ -81,22 +92,70 @@ class CameraFragment : Fragment() {
             }
 
     }
+    @SuppressLint("NotifyDataSetChanged")
     private val scannerLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
         if(it.resultCode == Activity.RESULT_OK)
         {
             it.data.let {
                 val scanResult = GmsDocumentScanningResult.fromActivityResultIntent(it)
                 scanResult?.getPages()?.let { pages ->
+
+
                     for (page in pages) {
+
+
                         val imageUri = page.imageUri
-                        selectedImage.add(ImagesData(imageUri))
+                        val bitmap =
+                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
+
+                        GlobalScope.launch(Dispatchers.IO) {
+                            val enhanceBitmap = enhanceImage(bitmap)
+                            val enhancedImageUri = saveBitmapToUri(enhanceBitmap)
+                            selectedImage.add(ImagesData(enhancedImageUri))
+                            launch(Dispatchers.Main) {
+
+                                adapter.notifyDataSetChanged()
+                            }
+                        }
+
+
+
+
                     }
-                    adapter.notifyDataSetChanged()
+
                 }
             }
         }
     }
 
+    private  fun enhanceImage(bitmap: Bitmap) : Bitmap {
+
+
+
+            val width = bitmap.width
+            val height = bitmap.height
+            val grayscaleBitmap = Bitmap.createBitmap(width, height, bitmap.config)
+
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    val pixel = bitmap.getPixel(x, y)
+                    val r = Color.red(pixel)
+                    val g = Color.green(pixel)
+                    val b = Color.blue(pixel)
+                    val gray = (0.299 * r + 0.587 * g + 0.114 * b).toInt()
+                    grayscaleBitmap.setPixel(x, y, Color.rgb(gray, gray, gray))
+                }
+            }
+
+
+     return grayscaleBitmap
+        
+    }
+
+    private fun saveBitmapToUri(bitmap: Bitmap): Uri {
+        val path = MediaStore.Images.Media.insertImage(requireContext().contentResolver, bitmap, "Enhanced Image", null)
+        return Uri.parse(path)
+    }
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun convertToPdf() {
         if(selectedImage.isEmpty())
@@ -104,19 +163,21 @@ class CameraFragment : Fragment() {
             Toast.makeText(context,"No Images Selected", Toast.LENGTH_LONG).show()
             return
         }
+        GlobalScope.launch(Dispatchers.IO){
+            val pdfUri = createPdfFile(requireContext())
+            launch(Dispatchers.Main) {
+                if(pdfUri != null)
+                {
+                    Toast.makeText(requireContext(),"Pdf Created at : $pdfUri", Toast.LENGTH_LONG).show()
+                    val fragment = PdfViewerFragment.newInstance(pdfUri)
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer,fragment)
+                        .commit()
 
+                }
 
-        val pdfUri = createPdfFile(requireContext())
-        if(pdfUri != null)
-        {
-            Toast.makeText(requireContext(),"Pdf Created at : $pdfUri", Toast.LENGTH_LONG).show()
-            val fragment = PdfViewerFragment.newInstance(pdfUri)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer,fragment)
-                .commit()
+            }
         }
-
-
 
     }
 
@@ -151,6 +212,7 @@ class CameraFragment : Fragment() {
         return pdfUri
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun onImageRemoved(image: ImagesData)
     {
         selectedImage.remove(image)

@@ -1,5 +1,6 @@
 package com.example.pdf.imagestopdf
 
+import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
@@ -37,7 +38,7 @@ class ImagesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentImagesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,7 +53,7 @@ class ImagesFragment : Fragment() {
         }
 
 
-        var imagesList = mutableListOf<ImagesData>()
+        val imagesList = mutableListOf<ImagesData>()
         val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(
             MediaStore.Images.Media._ID,
@@ -92,6 +93,7 @@ class ImagesFragment : Fragment() {
 
     }
 
+    @SuppressLint("IntentReset")
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/"

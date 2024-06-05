@@ -1,5 +1,6 @@
 package com.example.pdf.pdfiles
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
@@ -11,7 +12,7 @@ import com.example.pdf.excelfiles.ExcelFilesViewerFragment
 import com.example.pdf.pptfiles.PptFilesViewerFragment
 import com.example.pdf.wordfiles.WordFilesViewerFragment
 
-class PdfAdapter(val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<PdfAdapter.PdfViewHolder>() {
+class PdfAdapter(private val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<PdfAdapter.PdfViewHolder>() {
 
 
 
@@ -31,6 +32,7 @@ class PdfAdapter(val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<PdfAdapter
     }
     class PdfViewHolder(private val binding : ItemPdfBinding) : RecyclerView.ViewHolder(binding.root)
     {
+        @SuppressLint("SetTextI18n")
         fun bind(pdfFile : PdfFile)
         {
             binding.apply {

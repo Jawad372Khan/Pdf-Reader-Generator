@@ -8,6 +8,6 @@ import com.example.pdf.repositories.PdfRepository
 
 class WordFilesViewModel (application : Application)  : AndroidViewModel(application){
 
-    val wordFilesRepository = PdfRepository(application)
+    private val wordFilesRepository = PdfRepository(application)
     val wordFiles : LiveData<List<PdfFile>> = wordFilesRepository.getPdfFiles("word")
 }

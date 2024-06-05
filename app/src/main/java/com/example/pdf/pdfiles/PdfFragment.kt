@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pdf.databinding.FragmentPdfBinding
 
 
+@Suppress("RedundantSamConstructor")
 class PdfFragment : Fragment() {
 
 
@@ -20,14 +21,12 @@ class PdfFragment : Fragment() {
     private lateinit var binding : FragmentPdfBinding
     private lateinit var pdfViewModel: PdfViewModel
 
-    val REQUEST_CODE = 1
-
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding = FragmentPdfBinding.inflate(inflater,container,false)

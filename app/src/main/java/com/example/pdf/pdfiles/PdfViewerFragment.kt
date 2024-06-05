@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.pdf.databinding.FragmentPdfViewerBinding
 
 
+@Suppress("DEPRECATION")
 class PdfViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentPdfViewerBinding
@@ -17,7 +18,7 @@ class PdfViewerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPdfViewerBinding.inflate(inflater, container, false)
         return binding.root
     }

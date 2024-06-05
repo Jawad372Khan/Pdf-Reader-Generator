@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pdf.R
+import com.example.pdf.TextExtractorFragment
 import com.example.pdf.databinding.BottomSheetBinding
 import com.example.pdf.databinding.FragmentMainBinding
 import com.example.pdf.imagestopdf.CameraFragment
@@ -45,6 +46,13 @@ class MainFragment : Fragment() {
             binding.scanDocument.setOnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, CameraFragment())
+                    .commit()
+                dialog.dismiss()
+
+            }
+            binding.textExtractor.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, TextExtractorFragment())
                     .commit()
                 dialog.dismiss()
 

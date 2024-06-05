@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pdf.ImagesData
 import com.example.pdf.databinding.SelectedImagesListBinding
 
-class ImagesAdapter(var images : List<ImagesData>,private val onImageRemoved : (ImagesData) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ImagesViewHolder>() {
+class ImagesAdapter(private var images : List<ImagesData>,private val onImageRemoved : (ImagesData) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ImagesViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {

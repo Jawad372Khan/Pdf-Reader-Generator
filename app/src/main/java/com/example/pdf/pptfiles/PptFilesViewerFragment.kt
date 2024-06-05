@@ -1,5 +1,5 @@
 package com.example.pdf.pptfiles
-
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +14,8 @@ import org.apache.poi.xslf.usermodel.XSLFTextShape
 import java.io.InputStream
 
 
+
+@Suppress("DEPRECATION")
 class PptFilesViewerFragment : Fragment() {
 
     private lateinit var binding : FragmentPptFilesViewerBinding
@@ -22,11 +24,12 @@ class PptFilesViewerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPptFilesViewerBinding.inflate(inflater,container,false)
         return binding.root
     }
 
+    @SuppressLint("Recycle")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val uri = arguments?.getParcelable<Uri>("ppt_uri")
@@ -37,12 +40,14 @@ class PptFilesViewerFragment : Fragment() {
                 {
                    val htmlContent = convertPPTXToHTML(it)
                     loadHTMLInWebView(htmlContent)
+
                 }
             }
 
         }
 
     }
+
 
     private fun loadHTMLInWebView(htmlContent: String) {
 
@@ -58,19 +63,26 @@ class PptFilesViewerFragment : Fragment() {
         htmlBuilder.append("<html><body style='font-family: Arial, sans-serif;'>")
 
         for ((index, slide) in slides.withIndex()) {
+
+
             htmlBuilder.append("<div style='border:1px solid black; margin:10px; padding:10px;'>")
             htmlBuilder.append("<h2 style='text-align: center;'>Slide ${index + 1}</h2>")
 
+
             for (shape in slide.shapes) {
+
+
                 when (shape) {
                     is XSLFTextShape -> {
-                        htmlBuilder.append("<p>")
+                        htmlBuilder.append("<div style='margin-bottom: 10px;'>")
                         for (paragraph in shape.textParagraphs) {
+                            htmlBuilder.append("<p>")
                             for (run in paragraph.textRuns) {
                                 htmlBuilder.append(paragraph.text.replace("\n", "<br>"))
                             }
+                            htmlBuilder.append("</p>")
                         }
-                        htmlBuilder.append("</p>")
+                        htmlBuilder.append("</div>")
                     }
                     is XSLFPictureShape -> {
                         val pictureData = shape.pictureData
@@ -97,6 +109,11 @@ class PptFilesViewerFragment : Fragment() {
         return htmlBuilder.toString()
 
     }
+
+
+
+
+
 
 
     companion object {

@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pdf.pdfiles.PdfAdapter
 import com.example.pdf.databinding.FragmentWordFilesBinding
 
 
+@Suppress("RedundantSamConstructor")
 class WordFilesFragment : Fragment() {
 
 
@@ -22,7 +22,7 @@ class WordFilesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWordFilesBinding.inflate(inflater,container,false)
         return binding.root
     }

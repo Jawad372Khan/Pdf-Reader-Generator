@@ -1,5 +1,6 @@
 package com.example.pdf.wordfiles
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
@@ -10,7 +11,7 @@ import com.example.pdf.databinding.ItemWordBinding
 
 
 
-class WordAdapter(val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
+class WordAdapter(private val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
@@ -30,6 +31,7 @@ class WordAdapter(val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<WordAdapt
 
     class WordViewHolder(private val binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(pdfFile: PdfFile) {
             binding.apply {
                 pdfName.text = pdfFile.name
