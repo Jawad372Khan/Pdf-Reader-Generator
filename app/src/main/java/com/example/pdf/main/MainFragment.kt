@@ -11,6 +11,10 @@ import com.example.pdf.databinding.BottomSheetBinding
 import com.example.pdf.databinding.FragmentMainBinding
 import com.example.pdf.imagestopdf.CameraFragment
 import com.example.pdf.imagestopdf.ImagesFragment
+import com.example.pdf.pdfiles.BarCodeScanningFragment
+import com.example.pdf.pdfiles.PdfFragment
+import com.example.pdf.pdfiles.SignatureFragment
+import com.example.pdf.pdfiles.TextToPdfFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -56,6 +60,26 @@ class MainFragment : Fragment() {
                     .commit()
                 dialog.dismiss()
 
+            }
+            binding.signature.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, PdfFragment())
+                    .commit()
+                dialog.dismiss()
+
+            }
+            binding.textPdf.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, TextToPdfFragment())
+                    .commit()
+                dialog.dismiss()
+
+            }
+            binding.barCodeScanning.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, BarCodeScanningFragment())
+                    .commit()
+                dialog.dismiss()
             }
             dialog.setCancelable(false)
             dialog.setContentView(binding.root)

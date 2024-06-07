@@ -55,7 +55,4 @@ class PdfViewerFragment : Fragment() {
 
 
 
-
-
-
 }

@@ -46,7 +46,7 @@ class PdfAdapter(private val pdfFiles : List<PdfFile>) : RecyclerView.Adapter<Pd
                             val context = it.context
                             if(context is FragmentActivity)
                             {
-                                val fragment = PdfViewerFragment.newInstance(pdfFile.uri)
+                                val fragment = SignatureFragment.newInstance(pdfFile.uri)
                                 context.supportFragmentManager.beginTransaction()
                                     .replace(R.id.fragmentContainer,fragment)
                                     .commit()
