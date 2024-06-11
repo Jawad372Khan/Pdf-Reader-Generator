@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        style="@style/itemView"
         >
 
         <ImageView
@@ -16,19 +16,15 @@
             android:layout_height="64dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/ppt_fill_file"/>
+            android:src="@drawable/ppt"/>
 
         <TextView
             android:id="@+id/pdfName"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/pdfIcon"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:layout_marginLeft="10dp"
-
+            style="@style/itemName"
             />
 
         <TextView
@@ -37,10 +33,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/pdfName"
             app:layout_constraintLeft_toRightOf="@+id/pdfIcon"
-            android:textSize="14sp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-
+            style="@style/itemDate"
             />
 
         <TextView
@@ -49,9 +42,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/pdfDate"
             app:layout_constraintTop_toBottomOf="@id/pdfName"
-            android:textSize="14sp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
+            style="@style/itemSize"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

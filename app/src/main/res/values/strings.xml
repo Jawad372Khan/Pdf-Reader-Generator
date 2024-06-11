@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pdf</string>
+    <string name="app_name">PDFScanner</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pdf">.pdf</string>
     <string name="excel">.xlsx</string>
@@ -8,4 +8,8 @@
     <string name="powerPoint1">.ppt</string>
     <string name="word">.docx</string>
     <string name="word1">.doc</string>
+    <string name="scanner">PDFScanner</string>
+    <string name="permission">Permission Required</string>
+    <string name="request">To read and edit your files, please allow PDFScanner to access all your files.</string>
+    <string name="allow">Allow</string>
 </resources>
