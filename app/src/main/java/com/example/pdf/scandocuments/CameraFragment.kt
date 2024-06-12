@@ -1,4 +1,4 @@
-package com.example.pdf.imagestopdf
+package com.example.pdf.scandocuments
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,7 +12,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 
 import android.provider.MediaStore
 
@@ -25,28 +24,29 @@ import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.lifecycleScope
+import com.example.pdf.ImagesBitmap
 
 import com.example.pdf.ImagesData
 import com.example.pdf.PdfUtils
 import com.example.pdf.R
 import com.example.pdf.databinding.FragmentCameraBinding
+import com.example.pdf.imagestopdf.ImagesAdapter
 import com.example.pdf.pdfiles.PdfViewerFragment
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @Suppress("DEPRECATION")
 class CameraFragment : Fragment() {
 
     private lateinit var binding : FragmentCameraBinding
-    private var selectedImage = mutableListOf<ImagesData>()
-    private lateinit var adapter : ImagesAdapter
+    private var selectedImage = mutableListOf<ImagesBitmap>()
+    private lateinit var adapter : ScanImagesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,10 +59,10 @@ class CameraFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.cameraBtn.setOnClickListener {
-            openDocumentScanner()
-        }
-        adapter = ImagesAdapter(selectedImage,this::onImageRemoved)
+
+        openDocumentScanner()
+
+        adapter = ScanImagesAdapter(selectedImage,this::onImageRemoved)
         binding.cameraPics.adapter = adapter
 
         binding.pdfConvert.setOnClickListener {
@@ -92,6 +92,7 @@ class CameraFragment : Fragment() {
             }
 
     }
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("NotifyDataSetChanged")
     private val scannerLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
         if(it.resultCode == Activity.RESULT_OK)
@@ -99,29 +100,19 @@ class CameraFragment : Fragment() {
             it.data.let {
                 val scanResult = GmsDocumentScanningResult.fromActivityResultIntent(it)
                 scanResult?.getPages()?.let { pages ->
-
-
-                    for (page in pages) {
-
-
-                        val imageUri = page.imageUri
-                        val bitmap =
-                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
-
-                        GlobalScope.launch(Dispatchers.IO) {
+                    GlobalScope.launch(Dispatchers.IO){
+                        for (page in pages) {
+                            val imageUri = page.imageUri
+                            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
                             val enhanceBitmap = enhanceImage(bitmap)
-                            val enhancedImageUri = saveBitmapToUri(enhanceBitmap)
-                            selectedImage.add(ImagesData(enhancedImageUri))
-                            launch(Dispatchers.Main) {
 
+                            selectedImage.add(ImagesBitmap(enhanceBitmap))
+                            launch(Dispatchers.Main){
                                 adapter.notifyDataSetChanged()
                             }
                         }
-
-
-
-
                     }
+
 
                 }
             }
@@ -129,9 +120,6 @@ class CameraFragment : Fragment() {
     }
 
     private  fun enhanceImage(bitmap: Bitmap) : Bitmap {
-
-
-
             val width = bitmap.width
             val height = bitmap.height
             val grayscaleBitmap = Bitmap.createBitmap(width, height, bitmap.config)
@@ -152,10 +140,7 @@ class CameraFragment : Fragment() {
         
     }
 
-    private fun saveBitmapToUri(bitmap: Bitmap): Uri {
-        val path = MediaStore.Images.Media.insertImage(requireContext().contentResolver, bitmap, "Enhanced Image", null)
-        return Uri.parse(path)
-    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun convertToPdf() {
         if(selectedImage.isEmpty())
@@ -197,8 +182,8 @@ class CameraFragment : Fragment() {
             try {
                 contentResolver.openOutputStream(uri).use { outputStream ->
                     if (outputStream != null) {
-                        PdfUtils.createPdfFromImages(context,selectedImage.map {
-                            it.uri
+                        PdfUtils.createPdfFromBitmaps(context,selectedImage.map {
+                            it.bitmap
                         },outputStream)
                     }
                 }
@@ -210,10 +195,11 @@ class CameraFragment : Fragment() {
             }
         }
         return pdfUri
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun onImageRemoved(image: ImagesData)
+    private fun onImageRemoved(image: ImagesBitmap)
     {
         selectedImage.remove(image)
         adapter.notifyDataSetChanged()

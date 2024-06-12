@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pdf.databinding.FragmentPptFilesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @Suppress("RedundantSamConstructor")
@@ -29,12 +32,14 @@ class PptFilesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         pptViewModel = ViewModelProvider(this).get(PptFilesViewModel::class.java)
-        pptViewModel.pptList.observe(viewLifecycleOwner, Observer { pptList->
-            binding.apply {
-                pptRecyclerView.layoutManager = LinearLayoutManager(context)
-                pptRecyclerView.adapter = PptAdapter(pptList)
-            }
 
-        })
-    }
+            pptViewModel.pptList.observe(viewLifecycleOwner, Observer { pptList->
+                binding.apply {
+                        pptRecyclerView.layoutManager = LinearLayoutManager(context)
+                        pptRecyclerView.adapter = PptAdapter(pptList)
+                }
+
+            })
+        }
+
 }

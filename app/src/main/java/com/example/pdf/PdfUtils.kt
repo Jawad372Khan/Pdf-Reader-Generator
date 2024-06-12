@@ -46,18 +46,22 @@ object PdfUtils {
             }
         document.close()
         }
-    private fun scaleImage(bitmap : Bitmap,maxWidth : Float, maxHeight : Float) : Bitmap
-    {
-        val originalWidth = bitmap.width.toFloat()
-        val originalHeight = bitmap.height.toFloat()
 
-        val widthScale = maxWidth/originalWidth
-        val heightScale = maxHeight/originalHeight
+    fun createPdfFromBitmaps(context : Context,bitmaps: List<Bitmap>, outputStream: OutputStream) {
+        val pdfWriter = PdfWriter(outputStream)
+        val pdfDocument = PdfDocument(pdfWriter)
+        val document = Document(pdfDocument)
 
-        val scale = Math.min(widthScale,heightScale)
+        for (bitmap in bitmaps) {
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            val byteArray = byteArrayOutputStream.toByteArray()
+            val itextImage = Image(ImageDataFactory.create(byteArray))
 
-        val scaledWidth = (originalWidth * scale).toInt()
-        val scaledHeight = (originalHeight * scale).toInt()
-        return Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, false)
+            itextImage.setWidth(UnitValue.createPercentValue(100f))
+            document.add(itextImage)
+        }
+
+        document.close()
     }
 }

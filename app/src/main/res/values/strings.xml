@@ -12,4 +12,12 @@
     <string name="permission">Permission Required</string>
     <string name="request">To read and edit your files, please allow PDFScanner to access all your files.</string>
     <string name="allow">Allow</string>
+    <string name="tools">PDFScanner Tools</string>
+    <string name="images">Import Images</string>
+    <string name="documents">Scan Documents</string>
+    <string name="extract">Extract Text</string>
+    <string name="sign">Sign Documents</string>
+    <string name="barcode">Scan Barcode</string>
+    <string name="textpdf">Text to PDF</string>
+    <string name="generatepdf">Generate PDF</string>
 </resources>

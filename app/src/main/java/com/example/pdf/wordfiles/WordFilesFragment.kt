@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pdf.databinding.FragmentWordFilesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @Suppress("RedundantSamConstructor")
@@ -31,15 +34,12 @@ class WordFilesFragment : Fragment() {
 
         wordFilesViewMode = ViewModelProvider(this).get(WordFilesViewModel::class.java)
 
-        wordFilesViewMode.wordFiles.observe(viewLifecycleOwner, Observer { wordFiles->
+            wordFilesViewMode.wordFiles.observe(viewLifecycleOwner, Observer { wordFiles->
+                binding.apply {
+                        wordRecyclerView.layoutManager = LinearLayoutManager(context)
+                        wordRecyclerView.adapter = WordAdapter(wordFiles)
+                    }
+            })
+        }
 
-            binding.apply {
-                wordRecyclerView.layoutManager = LinearLayoutManager(context)
-                wordRecyclerView.adapter = WordAdapter(wordFiles)
-            }
-
-        })
-
-
-    }
 }

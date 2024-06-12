@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".pdfiles.SignatureFragment">
+        tools:context=".pdfsignature.SignatureFragment">
 
         <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/pdfView"
@@ -19,7 +19,7 @@
             />
 
 
-        <com.example.pdf.SignatureView
+        <com.example.pdf.pdfsignature.SignatureView
             android:id="@+id/signatureView"
             android:layout_width="match_parent"
             android:layout_height="150dp"

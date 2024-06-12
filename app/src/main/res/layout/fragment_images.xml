@@ -10,47 +10,32 @@
         tools:context=".imagestopdf.ImagesFragment">
 
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/imagesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="580dp"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_weight="1"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3"
-                android:verticalSpacing="8dp"
-                android:horizontalSpacing="8dp"
-                android:padding="8dp"
+                style="@style/galleryImagesRecyclerView"
                 />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectedRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/imagesRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            style="@style/selectedImagesRecyclerView"
             />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pdfBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="Generate Pdf"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="-16dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/generatePdfBtn"
+             />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/selectImages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Select Images"
-            android:textAllCaps="false"
-            />
+
 
 
 

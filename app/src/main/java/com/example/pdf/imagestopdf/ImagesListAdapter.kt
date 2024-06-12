@@ -3,8 +3,10 @@ package com.example.pdf.imagestopdf
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.pdf.ImagesData
 import com.example.pdf.databinding.ImagesItemBinding
+import kotlinx.coroutines.currentCoroutineContext
 
 class ImagesListAdapter(
     private var images: List<ImagesData>, private val onImageSelected: (ImagesData)-> Unit) :
@@ -26,10 +28,6 @@ class ImagesListAdapter(
         return images.size
     }
 
-    fun updateImages(newImages: List<ImagesData>) {
-        images = newImages
-        notifyDataSetChanged()
-    }
 
     class ImageViewHolder(val binding: ImagesItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -40,7 +38,10 @@ class ImagesListAdapter(
 
         ) {
             val image = imagesData
-            binding.imageView.setImageURI(image.uri)
+            Glide.with(itemView.context)
+                .load(image.uri)
+                .into(binding.imageView)
+
             binding.radioBtn.apply {
                 isChecked = selectedImages.contains(image)
                 setOnCheckedChangeListener { _, isChecked ->

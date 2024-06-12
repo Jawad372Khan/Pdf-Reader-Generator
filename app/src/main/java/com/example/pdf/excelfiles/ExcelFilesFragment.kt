@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pdf.pdfiles.PdfAdapter
 import com.example.pdf.databinding.FragmentExcelFilesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class ExcelFilesFragment : Fragment() {
@@ -28,13 +31,14 @@ class ExcelFilesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         excelFilesViewModel = ViewModelProvider(this).get(ExcelFilesViewModel::class.java)
-        excelFilesViewModel.excelList.observe(viewLifecycleOwner, Observer { excelList->
 
-            binding.apply {
-                excelRecyclerView.layoutManager = LinearLayoutManager(context)
-                excelRecyclerView.adapter = ExcelAdapter(excelList)
-            }
+            excelFilesViewModel.excelList.observe(viewLifecycleOwner, Observer { excelList->
+                binding.apply {
 
-        })
-    }
+                        excelRecyclerView.layoutManager = LinearLayoutManager(context)
+                        excelRecyclerView.adapter = ExcelAdapter(excelList)
+                }
+            })
+        }
+
 }

@@ -1,4 +1,4 @@
-package com.example.pdf.pdfiles
+package com.example.pdf.texttopdf
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pdf.R
 import com.example.pdf.databinding.FragmentTextToPdfBinding
+import com.example.pdf.pdfiles.PdfViewerFragment
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document

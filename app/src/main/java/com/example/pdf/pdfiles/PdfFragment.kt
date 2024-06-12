@@ -10,25 +10,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.pdf.databinding.FragmentPdfBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @Suppress("RedundantSamConstructor")
 class PdfFragment : Fragment() {
 
-
-
-
     private lateinit var binding : FragmentPdfBinding
     private lateinit var pdfViewModel: PdfViewModel
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         binding = FragmentPdfBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -36,16 +32,16 @@ class PdfFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
-
         pdfViewModel = ViewModelProvider(this).get(PdfViewModel::class.java)
-        pdfViewModel.pdfFiles.observe(viewLifecycleOwner, Observer { pdfFiles->
-            binding.pdfRecyclerView.layoutManager = LinearLayoutManager(context)
-            binding.pdfRecyclerView.adapter = PdfAdapter(pdfFiles)
+            pdfViewModel.pdfFiles.observe(viewLifecycleOwner, Observer { pdfFiles->
+                    binding.pdfRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.pdfRecyclerView.adapter = PdfAdapter(pdfFiles)
 
-        })
 
-    }
+            })
+
+        }
+
 
 
 }

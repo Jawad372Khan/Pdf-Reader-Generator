@@ -13,86 +13,173 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:id="@+id/pdfTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create PDF"
-                android:textSize="21dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:layout_width="183dp"
+                android:layout_height="19dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="30dp" />
+                style="@style/textView3" />
 
-            <Button
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/scanDocument"
+                style="@style/importImages"
                 android:id="@+id/imgToPdf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:text="Image To PDF"
-                android:textAllCaps="false"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pdfTextView" />
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/gallery"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/importImagesTextView"
+                    />
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/scanDocument"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="12dp"
-                android:text="Scan Document"
-                android:textAllCaps="false"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgToPdf"
-                app:layout_constraintTop_toBottomOf="@+id/pdfTextView" />
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/importImages"
+                android:id="@+id/scanDocument"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_baseline_document_scanner_24"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/scanDocumentTextView"
+                    />
 
-            <Button
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/signature"
+                style="@style/textExtractor"
                 android:id="@+id/textExtractor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Extract Text"
-                android:textAllCaps="false"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgToPdf" />
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/gallery"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/textExtractorTextView"
+                    />
 
-            <Button
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textExtractor"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/textExtractor"
                 android:id="@+id/signature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="228dp"
-                android:layout_marginTop="16dp"
-                android:text="Signature"
-                android:textAllCaps="false"
-                app:layout_constraintStart_toStartOf="@id/textExtractor"
-                app:layout_constraintTop_toBottomOf="@+id/scanDocument" />
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/gallery"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/signPdfTextView"
+                    />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/textPdf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Text to Pdf"
-                android:textAllCaps="false"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textExtractor" />
+                app:layout_constraintEnd_toStartOf="@id/barCodeScanning"
+                style="@style/textPdf"
+                android:id="@+id/textPdf"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/gallery"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/textPdfTextView"
+                    />
 
-            <Button
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textPdf"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/textPdf"
                 android:id="@+id/barCodeScanning"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="228dp"
-                android:layout_marginTop="16dp"
-                android:text="Scan Bar Code"
-                android:textAllCaps="false"
-                app:layout_constraintStart_toStartOf="@+id/textPdf"
-                app:layout_constraintTop_toBottomOf="@id/textExtractor" />
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_baseline_qr_code_scanner_24"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/barCodeScanTextView"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

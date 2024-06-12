@@ -1,4 +1,4 @@
-package com.example.pdf.pdfiles
+package com.example.pdf.barcodescanning
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.pdf.R
 import com.example.pdf.databinding.FragmentBarCodeScanningBinding
 import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.codescanner.GmsBarcodeScanner
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 

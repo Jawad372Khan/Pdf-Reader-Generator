@@ -99,19 +99,141 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:ellipsize">end</item>
     </style>
-
     <style name="itemDate">
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginTop">5dp</item>
     </style>
-
     <style name="itemSize">
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_marginTop">5dp</item>
     </style>
 
+    <!-- Bottom Sheet View -->
+    <style name="textView3">
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/tools</item>
+
+    </style>
+    <style name="importImages">
+        <item name="android:layout_marginTop">87dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+    <style name="importImagesTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/images</item>
+    </style>
+
+    <style name="scanDocumentTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/documents</item>
+    </style>
+
+    <style name="textExtractor">
+        <item name="android:layout_marginTop">140dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+
+    <style name="textExtractorTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/extract</item>
+    </style>
+    <style name="signPdfTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/sign</item>
+    </style>
+
+    <style name="textPdf">
+        <item name="android:layout_marginTop">193dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
+    <style name="textPdfTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/textpdf</item>
+    </style>
+    <style name="barCodeScanTextView">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginStart">44dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:text">@string/barcode</item>
+    </style>
+
+    <!-- Import Images From Gallery (Images to Pdf) -->
+    <style name="galleryImagesRecyclerView">
+        <item name="android:layout_weight">1</item>
+        <item name="layoutManager">androidx.recyclerview.widget.GridLayoutManager</item>
+        <item name="android:verticalSpacing">8dp</item>
+        <item name="android:horizontalSpacing">8dp</item>
+        <item name="spanCount">3</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="selectedImagesRecyclerView">
+        <item name="android:layout_weight">1</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:verticalSpacing">8dp</item>
+        <item name="android:horizontalSpacing">8dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="generatePdfBtn">
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:text">@string/generatepdf</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <!-- Images Item (Recycler View) (Import Images) -->
+    <style name="imageView1">
+        <item name="android:background">@drawable/img_bg</item>
+        <item name="android:elevation">50dp</item>
+        <item name="elevation">50dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="imageView">
+        <item name="android:padding">5dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+    <style name="radioBtn">
+        <item name="backgroundTint">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <!-- Scan Documents -->
 
 
 </resources>

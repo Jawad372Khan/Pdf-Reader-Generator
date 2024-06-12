@@ -48,9 +48,7 @@ class ImagesFragment : Fragment() {
         imagesViewModel = ViewModelProvider(this).get(ImagesViewModel::class.java)
 
 
-        binding.selectImages.setOnClickListener {
-            openGallery()
-        }
+
 
 
         val imagesList = mutableListOf<ImagesData>()
@@ -93,14 +91,7 @@ class ImagesFragment : Fragment() {
 
     }
 
-    @SuppressLint("IntentReset")
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
-        startActivity(intent)
 
-    }
 
 
     @RequiresApi(Build.VERSION_CODES.Q)

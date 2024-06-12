@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             style="@style/textView2" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/allowBtn"
             style="@style/allowBtn"
             android:layout_width="match_parent"

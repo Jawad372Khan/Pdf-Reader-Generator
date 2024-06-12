@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pdf.databinding.FragmentExcelFilesViewerBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.apache.poi.ss.usermodel.WorkbookFactory
 
 import java.io.InputStream
@@ -36,40 +39,40 @@ class ExcelFilesViewerFragment : Fragment() {
                     displayHtmlContent(htmlContent)
                     it.close()
                 }
-
             }
         }
-
-
-
     }
 
     private fun displayHtmlContent(htmlContent: String) {
-        binding.webView.loadDataWithBaseURL(null,htmlContent,"text/html","UTF-8",null)
+            binding.webView.loadDataWithBaseURL(null,htmlContent,"text/html","UTF-8",null)
 
     }
 
     private fun converExcelToHtml(inputStream: InputStream): String {
+
         val workbook = WorkbookFactory.create(inputStream)
         val sheet = workbook.getSheetAt(0)
         val htmlBuilder = StringBuilder()
 
-        htmlBuilder.append("<html><body><table border='1'>")
-        for(row in sheet)
-        {
-            htmlBuilder.append("<tr>")
-            for(cell in row)
+
+
+            htmlBuilder.append("<html><body><table border='1'>")
+            for(row in sheet)
             {
-                htmlBuilder.append("<td>")
-                htmlBuilder.append(cell.toString())
-                htmlBuilder.append("</td>")
+                htmlBuilder.append("<tr>")
+                for(cell in row)
+                {
+                    htmlBuilder.append("<td>")
+                    htmlBuilder.append(cell.toString())
+                    htmlBuilder.append("</td>")
+                }
+                htmlBuilder.append("</tr>")
+
             }
-            htmlBuilder.append("</tr>")
+            htmlBuilder.append("</table></body></html>")
 
-        }
-        htmlBuilder.append("</table></body></html>")
+            workbook.close()
 
-        workbook.close()
         return htmlBuilder.toString()
 
     }

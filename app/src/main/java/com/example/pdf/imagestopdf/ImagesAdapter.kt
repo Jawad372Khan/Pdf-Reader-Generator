@@ -3,6 +3,7 @@ package com.example.pdf.imagestopdf
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.pdf.ImagesData
 import com.example.pdf.databinding.SelectedImagesListBinding
 
@@ -26,7 +27,10 @@ class ImagesAdapter(private var images : List<ImagesData>,private val onImageRem
     class ImagesViewHolder(val binding: SelectedImagesListBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(imagesData: ImagesData, onImageRemoved: (ImagesData) -> Unit) {
-            binding.selectedImage.setImageURI(imagesData.uri)
+            Glide.with(itemView.context)
+                .load(imagesData.uri)
+                .into(binding.selectedImage)
+
             binding.remove.setOnClickListener {
                 onImageRemoved(imagesData)
             }

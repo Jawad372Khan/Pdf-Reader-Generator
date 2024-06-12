@@ -7,6 +7,9 @@ import android.provider.MediaStore
 import android.text.Selection
 import androidx.lifecycle.MutableLiveData
 import com.example.pdf.PdfFile
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -98,30 +101,33 @@ class PdfRepository (private val application : Application) {
 
         )
 
-        query?.use { cursor->
-            val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
-            val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
-            val dateColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED)
-            val sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE)
+        GlobalScope.launch(Dispatchers.IO){
+            query?.use { cursor->
+                val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+                val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
+                val dateColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_ADDED)
+                val sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE)
 
-            while (cursor.moveToNext())
-            {
-                val id = cursor.getLong(idColumn)
-                val name = cursor.getString(nameColumn)
-                val date = cursor.getLong(dateColumn) * 1000L
-                val size = cursor.getInt(sizeColumn)
+                while (cursor.moveToNext())
+                {
+                    val id = cursor.getLong(idColumn)
+                    val name = cursor.getString(nameColumn)
+                    val date = cursor.getLong(dateColumn) * 1000L
+                    val size = cursor.getInt(sizeColumn)
 
-                val contentUri : Uri = Uri.withAppendedPath(
-                    MediaStore.Files.getContentUri("external"),
-                    id.toString()
-                )
+                    val contentUri : Uri = Uri.withAppendedPath(
+                        MediaStore.Files.getContentUri("external"),
+                        id.toString()
+                    )
 
-                pdfFilesList += PdfFile(contentUri,name,SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(date)),size)
+                    pdfFilesList += PdfFile(contentUri,name,SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(date)),size)
+                }
+
             }
 
+            pdfFilesLiveData.postValue(pdfFilesList)
         }
 
-        pdfFilesLiveData.postValue(pdfFilesList)
         return pdfFilesLiveData
     }
 

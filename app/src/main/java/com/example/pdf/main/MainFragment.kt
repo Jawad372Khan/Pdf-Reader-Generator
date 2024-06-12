@@ -6,25 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pdf.R
-import com.example.pdf.TextExtractorFragment
+import com.example.pdf.textextractor.TextExtractorFragment
 import com.example.pdf.databinding.BottomSheetBinding
 import com.example.pdf.databinding.FragmentMainBinding
-import com.example.pdf.imagestopdf.CameraFragment
+import com.example.pdf.scandocuments.CameraFragment
 import com.example.pdf.imagestopdf.ImagesFragment
-import com.example.pdf.pdfiles.BarCodeScanningFragment
+import com.example.pdf.barcodescanning.BarCodeScanningFragment
 import com.example.pdf.pdfiles.PdfFragment
-import com.example.pdf.pdfiles.SignatureFragment
-import com.example.pdf.pdfiles.TextToPdfFragment
+import com.example.pdf.texttopdf.TextToPdfFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainFragment : Fragment() {
 
-
     private lateinit var binding : FragmentMainBinding
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,48 +37,54 @@ class MainFragment : Fragment() {
             val dialog = BottomSheetDialog(requireContext())
 
             val binding = BottomSheetBinding.inflate(LayoutInflater.from(requireContext()),null)
-            binding.imgToPdf.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, ImagesFragment())
-                    .commit()
-                dialog.dismiss()
+            binding.apply {
+                imgToPdf.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, ImagesFragment())
+                        .commit()
+                    dialog.dismiss()
+                }
+                scanDocument.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, CameraFragment())
+                        .commit()
+                    dialog.dismiss()
             }
-            binding.scanDocument.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, CameraFragment())
-                    .commit()
-                dialog.dismiss()
+                textExtractor.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, TextExtractorFragment())
+                        .commit()
+                    dialog.dismiss()
 
-            }
-            binding.textExtractor.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, TextExtractorFragment())
-                    .commit()
-                dialog.dismiss()
+                }
+                signature.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, PdfFragment())
+                        .commit()
+                    dialog.dismiss()
 
-            }
-            binding.signature.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, PdfFragment())
-                    .commit()
-                dialog.dismiss()
+                }
 
-            }
-            binding.textPdf.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, TextToPdfFragment())
-                    .commit()
-                dialog.dismiss()
+                textPdf.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, TextToPdfFragment())
+                        .commit()
+                    dialog.dismiss()
 
+                }
+                barCodeScanning.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, BarCodeScanningFragment())
+                        .commit()
+                    dialog.dismiss()
+                }
             }
-            binding.barCodeScanning.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, BarCodeScanningFragment())
-                    .commit()
-                dialog.dismiss()
-            }
-            dialog.setCancelable(false)
-            dialog.setContentView(binding.root)
+
+
+           dialog.apply {
+               setCancelable(false)
+               setContentView(binding.root)
+           }
             dialog.show()
         }
     }
@@ -100,14 +102,4 @@ class MainFragment : Fragment() {
         }.attach()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
-    }
 }

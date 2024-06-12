@@ -18,6 +18,9 @@ import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.element.Text
 import com.itextpdf.layout.property.TextAlignment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment
 import java.io.*
 
@@ -44,21 +47,16 @@ class WordFilesViewerFragment : Fragment() {
     @SuppressLint("Recycle")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val uri = arguments?.getParcelable<Uri>("word_uri")
-
-
-
         if (uri != null) {
             requireContext().contentResolver.openInputStream(uri).let {
                 if (it != null) {
 
-                    val pdfFile = File(Environment.getExternalStorageDirectory(), "document.pdf")
-                    convertWordToPdf(it,pdfFile)
-                    binding.wordView.fromFile(pdfFile).load()
+                        val pdfFile = File(Environment.getExternalStorageDirectory(), "document.pdf")
+                        convertWordToPdf(it,pdfFile)
+                        binding.wordView.fromFile(pdfFile).load()
 
-
-                }
-
-            }
+                        }
+                    }
         }
     }
 
@@ -75,10 +73,9 @@ class WordFilesViewerFragment : Fragment() {
             for (para in document.paragraphs) {
                 val pdfParagraph = Paragraph()
 
-                // Iterate through the runs in the paragraph
+
                 for (run in para.runs) {
                     if (run.embeddedPictures.isNotEmpty()) {
-                        // If the run contains images, add them to the PDF
                         for (pic in run.embeddedPictures) {
                             val picData = pic.pictureData.data
                             val img =
@@ -86,10 +83,8 @@ class WordFilesViewerFragment : Fragment() {
                             doc.add(img)
                         }
                     } else {
-                        // Add the text run to the PDF paragraph
-                        val text = Text(run.text())
 
-                        // Handle text formatting
+                        val text = Text(run.text())
                         if (run.isBold) text.setBold()
                         if (run.isItalic) text.setItalic()
                         if (run.isStrike) text.setUnderline()
@@ -107,12 +102,13 @@ class WordFilesViewerFragment : Fragment() {
                     else -> pdfParagraph.setTextAlignment(TextAlignment.LEFT)
                 }
 
-                doc.add(pdfParagraph)
+                    doc.add(pdfParagraph)
             }
 
-            // Close the documents
             doc.close()
             pdfDoc.close()
+
+
         }
 
 

@@ -1,9 +1,8 @@
-package com.example.pdf.pdfiles
+package com.example.pdf.pdfsignature
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.graphics.Bitmap
-import android.graphics.PointF
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle

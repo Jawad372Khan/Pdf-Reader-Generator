@@ -9,6 +9,7 @@ import com.example.pdf.PdfFile
 import com.example.pdf.R
 import com.example.pdf.databinding.ItemPdfBinding
 import com.example.pdf.excelfiles.ExcelFilesViewerFragment
+import com.example.pdf.pdfsignature.SignatureFragment
 import com.example.pdf.pptfiles.PptFilesViewerFragment
 import com.example.pdf.wordfiles.WordFilesViewerFragment
 
