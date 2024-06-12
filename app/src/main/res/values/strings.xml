@@ -20,4 +20,5 @@
     <string name="barcode">Scan Barcode</string>
     <string name="textpdf">Text to PDF</string>
     <string name="generatepdf">Generate PDF</string>
+    <string name="editTextHint">Enter text to convert</string>
 </resources>

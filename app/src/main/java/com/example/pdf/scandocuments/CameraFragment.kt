@@ -6,16 +6,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
-
-
-
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-
 import android.provider.MediaStore
-
-
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,12 +19,9 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.example.pdf.ImagesBitmap
-
-import com.example.pdf.ImagesData
 import com.example.pdf.PdfUtils
 import com.example.pdf.R
 import com.example.pdf.databinding.FragmentCameraBinding
-import com.example.pdf.imagestopdf.ImagesAdapter
 import com.example.pdf.pdfiles.PdfViewerFragment
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
