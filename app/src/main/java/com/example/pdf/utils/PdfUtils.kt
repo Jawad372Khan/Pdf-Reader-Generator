@@ -1,14 +1,11 @@
-package com.example.pdf
+package com.example.pdf.utils
 
-import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
-import com.example.pdf.pdfiles.PdfViewerFragment
 
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.kernel.pdf.PdfDocument
@@ -23,7 +20,6 @@ import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.max
 
 object PdfUtils {
 
@@ -74,4 +70,41 @@ object PdfUtils {
     }
 
 
+    // Create PDF from Text
+
+
+     fun generatePdf(context : Context,text : String) : Uri?{
+        val fileName = generateFileName()
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME,"$fileName.pdf")
+            put(MediaStore.MediaColumns.MIME_TYPE,"application/pdf")
+            put(MediaStore.MediaColumns.RELATIVE_PATH,"Documents/")
+        }
+
+        val uri = context.contentResolver.insert(MediaStore.Files.getContentUri("external"),contentValues)
+        uri.let {
+            if(it != null)
+                context.contentResolver.openOutputStream(it).use { outputStream ->
+                    if(outputStream != null)
+                    {
+                        writePdf(text,outputStream)
+                    }
+                }
+        }
+        return uri
+    }
+
+    private fun writePdf(text : String,outputStream: OutputStream) {
+        val writer = PdfWriter(outputStream)
+        val pdfDocument = PdfDocument(writer)
+        val document = Document(pdfDocument)
+        document.add(Paragraph(text))
+        document.close()
+    }
+
+
+    private fun generateFileName(): String {
+        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+        return "PDF_" + sdf.format(Date())
+    }
 }

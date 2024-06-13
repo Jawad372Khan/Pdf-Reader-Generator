@@ -4,9 +4,8 @@ import android.app.Application
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
-import android.text.Selection
 import androidx.lifecycle.MutableLiveData
-import com.example.pdf.PdfFile
+import com.example.pdf.dataclasses.PdfFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

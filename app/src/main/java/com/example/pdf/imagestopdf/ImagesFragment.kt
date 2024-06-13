@@ -1,10 +1,8 @@
 package com.example.pdf.imagestopdf
 
-import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
@@ -17,8 +15,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
-import com.example.pdf.ImagesData
-import com.example.pdf.PdfUtils
+import com.example.pdf.dataclasses.ImagesData
+import com.example.pdf.utils.PdfUtils
 import com.example.pdf.R
 import com.example.pdf.databinding.FragmentImagesBinding
 import com.example.pdf.pdfiles.PdfViewerFragment

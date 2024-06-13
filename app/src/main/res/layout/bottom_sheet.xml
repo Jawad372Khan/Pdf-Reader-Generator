@@ -9,11 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:elevation="50dp">
+        android:elevation="50dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
             >
 
             <TextView
@@ -26,7 +28,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="140dp"
-                android:layout_height="40dp"
+                android:layout_height="140dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/scanDocument"
@@ -52,11 +54,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_height="140dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgToPdf"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/importImages"
+                style="@style/scanDocuments"
                 android:id="@+id/scanDocument"
                 >
                 <ImageView
@@ -108,7 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textExtractor"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/textExtractor"
+                style="@style/signPdf"
                 android:id="@+id/signature"
                 >
                 <ImageView
@@ -155,12 +157,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="150dp"
+                android:layout_width="140dp"
                 android:layout_height="40dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textPdf"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/textPdf"
+                style="@style/scanCode"
                 android:id="@+id/barCodeScanning"
                 >
                 <ImageView

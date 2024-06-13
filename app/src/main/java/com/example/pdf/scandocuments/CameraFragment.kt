@@ -18,8 +18,8 @@ import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.example.pdf.ImagesBitmap
-import com.example.pdf.PdfUtils
+import com.example.pdf.dataclasses.ImagesBitmap
+import com.example.pdf.utils.PdfUtils
 import com.example.pdf.R
 import com.example.pdf.databinding.FragmentCameraBinding
 import com.example.pdf.pdfiles.PdfViewerFragment

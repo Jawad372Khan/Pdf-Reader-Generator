@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pdf.ImagesBitmap
+import com.example.pdf.dataclasses.ImagesBitmap
 import com.example.pdf.databinding.SelectedImagesListBinding
 
 class ScanImagesAdapter(private var images : List<ImagesBitmap>, private val onImageRemoved : (ImagesBitmap) -> Unit) : RecyclerView.Adapter<ScanImagesAdapter.ImagesViewHolder>() {

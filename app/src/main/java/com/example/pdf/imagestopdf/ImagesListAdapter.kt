@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pdf.ImagesData
+import com.example.pdf.dataclasses.ImagesData
 import com.example.pdf.databinding.ImagesItemBinding
-import kotlinx.coroutines.currentCoroutineContext
 
 class ImagesListAdapter(
     private var images: List<ImagesData>, private val onImageSelected: (ImagesData)-> Unit) :
@@ -36,7 +35,7 @@ class ImagesListAdapter(
             selectedImages: MutableSet<ImagesData>,
             onImageSelected: (ImagesData) -> Unit,
 
-        ) {
+            ) {
             val image = imagesData
             Glide.with(itemView.context)
                 .load(image.uri)

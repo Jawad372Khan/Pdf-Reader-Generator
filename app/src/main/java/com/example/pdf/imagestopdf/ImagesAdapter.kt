@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pdf.ImagesData
+import com.example.pdf.dataclasses.ImagesData
 import com.example.pdf.databinding.SelectedImagesListBinding
 
-class ImagesAdapter(private var images : List<ImagesData>,private val onImageRemoved : (ImagesData) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ImagesViewHolder>() {
+class ImagesAdapter(private var images : List<ImagesData>, private val onImageRemoved : (ImagesData) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ImagesViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {

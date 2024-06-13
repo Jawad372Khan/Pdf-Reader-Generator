@@ -135,6 +135,12 @@
         <item name="android:text">@string/images</item>
     </style>
 
+    <style name="scanDocuments">
+        <item name="android:layout_marginTop">87dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
     <style name="scanDocumentTextView">
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginStart">44dp</item>
@@ -157,6 +163,12 @@
         <item name="android:textColor">@color/light_black</item>
         <item name="android:text">@string/extract</item>
     </style>
+    <style name="signPdf">
+        <item name="android:layout_marginTop">140dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
+    </style>
     <style name="signPdfTextView">
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginStart">44dp</item>
@@ -177,6 +189,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/light_black</item>
         <item name="android:text">@string/textpdf</item>
+    </style>
+    <style name="scanCode">
+        <item name="android:layout_marginTop">193dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="cornerRadius">5dp</item>
     </style>
     <style name="barCodeScanTextView">
         <item name="android:layout_marginTop">12dp</item>
@@ -239,9 +257,8 @@
         <item name="android:hint">@string/editTextHint</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:padding">4dp</item>
-        <item name="elevation">10dp</item>
-        <item name="android:elevation">10dp</item>
+        <item name="android:padding">8dp</item>
     </style>
+
 
 </resources>

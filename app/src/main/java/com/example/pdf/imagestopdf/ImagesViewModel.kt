@@ -7,7 +7,7 @@ import android.provider.MediaStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pdf.ImagesData
+import com.example.pdf.dataclasses.ImagesData
 
 class ImagesViewModel(application: Application): AndroidViewModel(application) {
 

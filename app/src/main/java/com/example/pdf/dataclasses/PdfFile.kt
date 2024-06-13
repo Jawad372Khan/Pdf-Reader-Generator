@@ -1,4 +1,4 @@
-package com.example.pdf
+package com.example.pdf.dataclasses
 
 import android.net.Uri
 

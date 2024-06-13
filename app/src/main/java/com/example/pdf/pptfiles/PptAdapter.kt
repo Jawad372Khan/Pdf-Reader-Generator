@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pdf.PdfFile
+import com.example.pdf.dataclasses.PdfFile
 import com.example.pdf.R
 import com.example.pdf.databinding.ItemPptxBinding
 
