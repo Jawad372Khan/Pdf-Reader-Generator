@@ -49,7 +49,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     style="@style/importImagesTextView"
                     />
-                
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

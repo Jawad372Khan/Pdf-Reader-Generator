@@ -63,7 +63,7 @@ class BarCodeScanningFragment : Fragment() {
                         val type = it.wifi!!.encryptionType
                         binding.barCodeResult.text = "SSID : "+ ssid + "\n"+
                                                     "Password : "+ password + "\n"+
-                                                    "Type : "
+                                                    "Type : "+ type
                     }
                     Barcode.TYPE_URL -> {
                         val title = it.url!!.title
